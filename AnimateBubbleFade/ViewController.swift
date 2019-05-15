@@ -26,13 +26,12 @@ class ViewController: UIViewController {
     
     func fadeOut(view: UIView){
         view.transform = CGAffineTransform(scaleX: 5, y: 5)
-        view.backgroundColor = UIColor(white: 1, alpha: 0)
+        view.alpha = 0
     }
     
     func fadeIn(view: UIView){
         view.transform = CGAffineTransform(scaleX: 1, y: 1)
-        view.backgroundColor = UIColor(displayP3Red: red, green: green, blue:
-            blue, alpha: 1)
+        view.alpha = 1
     }
     
     func move(view: UIView) {
@@ -59,7 +58,9 @@ class ViewController: UIViewController {
         }) { (finished) in
             if finished {
                 self.move(view: self.bubble)
-                UIView.animate(withDuration: 1, delay: 0.5, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveLinear, animations: {
+                self.bubble.backgroundColor = UIColor(displayP3Red: self.red, green: self.green, blue:
+                    self.blue, alpha: 1)
+                UIView.animate(withDuration: 1.5, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.4, options: [.allowUserInteraction], animations: {
                     self.fadeIn(view: self.bubble)
                 })
             }
