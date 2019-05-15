@@ -59,7 +59,7 @@ class ViewController: UIViewController {
         }) { (finished) in
             if finished {
                 self.move(view: self.bubble)
-                UIView.animate(withDuration: 1, delay: 0.5, usingSpringWithDamping: 0.46, initialSpringVelocity: 0.54, options: .curveLinear, animations: {
+                UIView.animate(withDuration: 1, delay: 0.5, usingSpringWithDamping: 1, initialSpringVelocity: 0.5, options: .curveLinear, animations: {
                     self.fadeIn(view: self.bubble)
                 })
             }
