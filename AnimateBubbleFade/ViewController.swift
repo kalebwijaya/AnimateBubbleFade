@@ -19,12 +19,21 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bubble.layer.cornerRadius = bubble.frame.width/2
+        firstAnimate()
         let gesture = UITapGestureRecognizer(target: self, action:  #selector(self.checkAction))
         bubble.addGestureRecognizer(gesture)
     }
     
+    func firstAnimate(){
+        bubble.transform = CGAffineTransform(scaleX: 7, y: 7)
+        bubble.alpha = 0
+        UIView.animate(withDuration: 2, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: [.allowUserInteraction], animations: {
+            self.fadeIn(view: self.bubble)
+        })
+    }
+    
     func fadeOut(view: UIView){
-        view.transform = CGAffineTransform(scaleX: 5, y: 5)
+        view.transform = CGAffineTransform(scaleX: 7, y: 7)
         view.alpha = 0
     }
     
@@ -62,7 +71,7 @@ class ViewController: UIViewController {
             if finished {
                 self.move(view: self.bubble)
                 self.changeColor()
-                UIView.animate(withDuration: 1.5, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0, options: [.allowUserInteraction], animations: {
+                UIView.animate(withDuration: 2, delay: 1, usingSpringWithDamping: 0.5, initialSpringVelocity: 0, options: [.allowUserInteraction], animations: {
                     self.fadeIn(view: self.bubble)
                 })
             }
