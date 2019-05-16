@@ -12,16 +12,15 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var bubble: UIView!
     var flag:Bool = true
-    var red = CGFloat(Float.random(in: 0...1))
-    var blue = CGFloat(Float.random(in: 0...1))
-    var green = CGFloat(Float.random(in: 0...1))
+    var red:CGFloat!
+    var blue:CGFloat!
+    var green:CGFloat!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         bubble.layer.cornerRadius = bubble.frame.width/2
         let gesture = UITapGestureRecognizer(target: self, action:  #selector(self.checkAction))
-        self.bubble.addGestureRecognizer(gesture)
-        
+        bubble.addGestureRecognizer(gesture)
     }
     
     func fadeOut(view: UIView){
@@ -32,6 +31,14 @@ class ViewController: UIViewController {
     func fadeIn(view: UIView){
         view.transform = CGAffineTransform(scaleX: 1, y: 1)
         view.alpha = 1
+    }
+    
+    func changeColor(){
+        red = CGFloat(Float.random(in: 0...1))
+        blue = CGFloat(Float.random(in: 0...1))
+        green = CGFloat(Float.random(in: 0...1))
+        bubble.backgroundColor = UIColor(displayP3Red: self.red, green: self.green, blue:
+            self.blue, alpha: 1)
     }
     
     func move(view: UIView) {
@@ -49,18 +56,13 @@ class ViewController: UIViewController {
     }
     
     @objc func checkAction(sender : UITapGestureRecognizer) {
-        self.red = CGFloat(Float.random(in: 0...1))
-        self.blue = CGFloat(Float.random(in: 0...1))
-        self.green = CGFloat(Float.random(in: 0...1))
-        
         UIView.animate(withDuration: 0.5, animations: {
             self.fadeOut(view: self.bubble)
         }) { (finished) in
             if finished {
                 self.move(view: self.bubble)
-                self.bubble.backgroundColor = UIColor(displayP3Red: self.red, green: self.green, blue:
-                    self.blue, alpha: 1)
-                UIView.animate(withDuration: 1.5, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.4, options: [.allowUserInteraction], animations: {
+                self.changeColor()
+                UIView.animate(withDuration: 1.5, delay: 0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0, options: [.allowUserInteraction], animations: {
                     self.fadeIn(view: self.bubble)
                 })
             }
@@ -68,4 +70,3 @@ class ViewController: UIViewController {
     }
 
 }
-
